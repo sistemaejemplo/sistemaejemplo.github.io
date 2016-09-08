@@ -1,0 +1,588 @@
+<!DOCTYPE html5>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+  <title>mpc</title>
+  <link rel="stylesheet" href="css/boostrap-dist.css"/>
+  <link rel="stylesheet" href="css/flexboxgrid-dist.css">
+  <link rel="stylesheet" type="text/css" href="css/usuarios-dist.css">
+  <link rel="stylesheet" href="css/formValidation-dist.css">
+  <link href="https://file.myfontastic.com/8ypDSzHSaeRKZx2Nz5ntJB/icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/jquery-confirm-dist.css">
+  <link rel="stylesheet" href="css/dataTables-bootstrap-dist.css">
+  <link rel="stylesheet" href="css/core-dist.css"/>
+  <style type="text/css">
+    [class*="col-"]{
+      padding: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="#0" class="mover-aside mpc-menu"></a>
+    <div class="nav-derecha">
+      <a href="#0" class="mpc-mail"></a>
+      <a href="#0" class="mpc-bell"></a>
+      <div class="dropdown">
+        <a href="#0" data-toggle="dropdown">
+          <div class="usuario-icono">
+            <img src="img/usuarios/x80/10m.jpg" alt="">
+          </div>
+          <span>Camilo Bermudez</span>
+          <i class="mpc-down-mini"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="perfil.html"><i class="mpc-user"></i>Perfil</a></li>
+          <li><a href="#"><i class="mpc-question"></i>Ayuda</a></li>
+          <li><a href="index.html"><i class="mpc-power-off"></i>Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <aside>
+    <a href="inicio.html"><i class="mpc-home"></i>Inicio</a>
+    <a href="lista_vehiculos.html"><i class="mpc-book"></i>Vehículos</a>
+    <a href="#0"><i class="mpc-clipboard"></i>Ficha técnica</a>
+    <a href="lista_componentes.html"><i class="mpc-droplet"></i>Componentes</a>
+    <a href="lista_de_ordenes.html"><i class="mpc-list-alt"></i>Ordenes</a>
+    <a href="#0"><i class="mpc-chart-bar"></i>Estadisticas</a>
+    <a href="reportes.html"><i class="mpc-book-1"></i>Reportes</a>
+    <a href="lista_usuarios.html"><i class="mpc-users"></i>Usuarios</a>
+  </aside>
+
+  <main> 
+    <!-- Miga de pan -->
+    <div class="row sin-margen caja miga">
+      <div class="col-xs-12 col-sm-6">
+        <ol class="breadcrumb">
+          <li><a href="inicio.html"><i class="mpc-home"></i>Inicio</a></li>
+          <li class="active"><i class="mpc-list-alt"></i>Componentes</li>
+        </ol>
+      </div>
+      <div class="col-xs-12 col-sm-6 start-xs end-sm">
+        <a href="#0" class="btn btn-primary agregar-com" data-toggle="modal" data-target="#registrar_componente"><i class="mpc-plus"></i>Agregar componente</a>
+      </div>
+    </div>
+    <!-- Modales -->
+    <div class="modal fade" id="registrar_componente">
+      <div class="modal-dialog" role="document" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4><i class="mpc-plus"></i>Agregar componete</h4>            
+          </div>
+          <div class="modal-body">
+            <div class="col-xs-12 table-responsive">
+                <form id="bookForm" method="post">
+                    <div class="form-group" style="display:flex; flex-wrap: nowrap; width: 100%;">
+                        <tr>
+                            <td><input type="text" class="form-control" name="book[0].title" placeholder="Nombre componete" /></td>
+                            <td><input type="text" class="form-control" name="book[0].price" placeholder="Vida util" /></td>
+                            <button type="button" class="btn btn-default addButton" style="max-width:40px;"><i class="mpc-plus"></i></button>
+                        </tr>
+                    </div>
+
+                    <!-- The template for adding new field -->
+                    <div class="form-group hide" id="bookTemplate" style="display:flex; flex-wrap: nowrap; width: 100%;">
+                        <tr>
+                            <td><input type="text" class="form-control" name="title" placeholder="Nombre componete" /></td>
+                            <td><input type="text" class="form-control" name="price" placeholder="Vida util" /></td>
+                            <button type="button" class="btn btn-default removeButton" style="max-width:40px;"><i class="mpc-minus">-</i></button>
+                        </tr>
+                    </div>
+
+                    <div class="form-group flexible end-xs">
+                      <button type="submit" class="btn btn-success">Agregar</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Contenido -->
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="alert alert-success" style="display:none;">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Nuevo componente agregado</strong> ya puede hacer uso de el.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-4 last-xs first-md" style="padding: 0 10px;">
+        <div class="row caja blanca">
+          <div class="col-xs-12 col-sm-6 col-md-12">
+            <canvas id="myCharts" width="400" height="400" style="max-width: 600px;"></canvas>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-12">
+            <hr>
+            <br>
+            <table class="table">
+              <thead>
+                <caption>Coste promedio de componentes reemplazados</caption>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Coste regular</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cigueñal</td>
+                  <td>$325.000</td>
+                </tr>
+                <tr>
+                  <td>Árbol de vielas</td>
+                  <td>$287.000</td>
+                </tr>
+                <tr>
+                  <td>Bateria</td>
+                  <td>$100.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-xs-12 col-md-8 panel panel-default table-responsive last-md first-xs">
+            <table id="ordenes" class="table table-striped table-list">
+              <thead>
+                <tr>
+                  <th>Código de componete</th>
+                  <th>Nombre</th>
+                  <th>Vida util</th>
+                  <th></th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr>
+                  <td>123</td>
+                  <td>Guardabarro</td>
+                  <td>12 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>176</td>
+                  <td>Acelerador</td>
+                  <td>5 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>287</td>
+                  <td>Árbol de levas</td>
+                  <td>7 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>872</td>
+                  <td>Bocina</td>
+                  <td>6 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>212</td>
+                  <td>Filtro de aire</td>
+                  <td>6 meses</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>122</td>
+                  <td>Bateria</td>
+                  <td>1 año</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="editar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>789</td>
+                  <td>Cigueñal</td>
+                  <td>3 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>187</td>
+                  <td>Panel instrumentos</td>
+                  <td>10 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>927</td>
+                  <td>Espejo retrovisor</td>
+                  <td>10 años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>123</td>
+                  <td>Guardabarro</td>
+                  <td>12 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>176</td>
+                  <td>Acelerador</td>
+                  <td>5 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>287</td>
+                  <td>Árbol de levas</td>
+                  <td>7 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>872</td>
+                  <td>Bocina</td>
+                  <td>6 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>212</td>
+                  <td>Filtro de aire</td>
+                  <td>6 meses</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>122</td>
+                  <td>Bateria</td>
+                  <td>1 año</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="editar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>789</td>
+                  <td>Cigueñal</td>
+                  <td>3 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>187</td>
+                  <td>Panel instrumentos</td>
+                  <td>10 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>927</td>
+                  <td>Espejo retrovisor</td>
+                  <td>10 años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>123</td>
+                  <td>Guardabarro</td>
+                  <td>12 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>176</td>
+                  <td>Acelerador</td>
+                  <td>5 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>287</td>
+                  <td>Árbol de levas</td>
+                  <td>7 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>872</td>
+                  <td>Bocina</td>
+                  <td>6 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>212</td>
+                  <td>Filtro de aire</td>
+                  <td>6 meses</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>122</td>
+                  <td>Bateria</td>
+                  <td>1 año</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="editar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>789</td>
+                  <td>Cigueñal</td>
+                  <td>3 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>187</td>
+                  <td>Panel instrumentos</td>
+                  <td>10 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>927</td>
+                  <td>Espejo retrovisor</td>
+                  <td>10 años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td>123</td>
+                  <td>Guardabarro</td>
+                  <td>12 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>176</td>
+                  <td>Acelerador</td>
+                  <td>5 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>287</td>
+                  <td>Árbol de levas</td>
+                  <td>7 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>872</td>
+                  <td>Bocina</td>
+                  <td>6 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>212</td>
+                  <td>Filtro de aire</td>
+                  <td>6 meses</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>122</td>
+                  <td>Bateria</td>
+                  <td>1 año</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="editar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>789</td>
+                  <td>Cigueñal</td>
+                  <td>3 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>187</td>
+                  <td>Panel instrumentos</td>
+                  <td>10 Años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>927</td>
+                  <td>Espejo retrovisor</td>
+                  <td>10 años</td>
+                  <td><button type="button" class="mpc-edit btn btn-primary" data-toggle="editar" data-placement="top" title="Editar"></button>
+                    <button type="button" class="mpc-trash btn btn-danger" data-toggle="eliminar" data-placement="top" title="Eliminar"></button>
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- JavaScript -->
+
+  <script src="js/jquery-dist.js"></script>
+  <script src="js/boostrap-dist.js"></script>
+  <script src="js/jquery-confirm-dist.js"></script>
+  <script src="js/jquery-datatables-dist.js"></script>
+  <script src="js/dataTables-boostrap-dist.js"></script>
+  <script src="js/formValidation-dist.js"></script>
+  <script src="js/framework/bootstrap-dist.js"></script>
+  <script src="js/chart-dist.js"></script>
+  <script src="js/jquery-mask.js"></script>
+  <script src="js/core-dist.js"></script>
+  <script>
+    $(document).ready(function(){
+      // Varios
+      $('[data-toggle="editar"]').tooltip();
+      $('[data-toggle="eliminar"]').tooltip();
+
+
+      //Tablas
+      $('#ordenes').DataTable({
+            "language": {
+              "sProcessing":     "Procesando...",
+              "sLengthMenu":     "Mostrar _MENU_ registros",
+              "sZeroRecords":    "No se encontraron resultados",
+              "sEmptyTable":     "Ningún dato disponible en esta tabla",
+              "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+              "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+              "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+              "sInfoPostFix":    "",
+              "sSearch":         "Buscar:",
+              "sUrl":            "",
+              "sInfoThousands":  ",",
+              "sLoadingRecords": "Cargando...",
+              "oPaginate": {
+                  "sFirst":    "Primero",
+                  "sLast":     "Último",
+                  "sNext":     "Siguiente",
+                  "sPrevious": "Anterior"
+              },
+            }
+          });
+      //Validación
+      
+
+      var titleValidators = {
+            err:  'tooltip',
+            validators: ''
+        },
+        priceValidators = {
+            validators: {
+                notEmpty: {
+                    message: ' '
+                }
+            }
+        },
+        bookIndex = 0;
+
+        $('#bookForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                'book[0].title': titleValidators,
+                'book[0].price': priceValidators
+            }
+        })
+
+        // Add button click handler
+        .on('click', '.addButton', function() {
+            bookIndex++;
+            var $template = $('#bookTemplate'),
+                $clone    = $template
+                                .clone()
+                                .removeClass('hide')
+                                .removeAttr('id')
+                                .attr('data-book-index', bookIndex)
+                                .insertBefore($template);
+
+            // Update the name attributes
+            $clone
+                .find('[name="title"]').attr('name', 'book[' + bookIndex + '].title').end()
+                .find('[name="price"]').attr('name', 'book[' + bookIndex + '].price').end();
+
+            // Add new fields
+            // Note that we also pass the validator rules for new field as the third parameter
+            $('#bookForm')
+                .formValidation('addField', 'book[' + bookIndex + '].title', titleValidators)
+                .formValidation('addField', 'book[' + bookIndex + '].price', priceValidators);
+        })
+
+        // Remove button click handler
+        .on('click', '.removeButton', function() {
+            var $row  = $(this).parents('.form-group'),
+                index = $row.attr('data-book-index');
+
+            // Remove fields
+            $('#bookForm')
+                .formValidation('removeField', $row.find('[name="book[' + index + '].title"]'))
+                .formValidation('removeField', $row.find('[name="book[' + index + '].price"]'));
+
+            // Remove element containing the fields
+            $row.remove();
+        });
+
+      $('#registrar_componente').on('hidden.bs.modal', function() {
+          $('#nuevoComponente').formValidation('resetForm', true);
+      });
+      //Graficas
+      var colera = document.getElementById("myCharts");
+      var myCharts = new Chart(colera, {
+        type: 'pie',
+        data: {
+          labels: ["Desgastados","En uso","Nuevos"],
+          datasets: [
+              {
+                  data: [440, 210, 160],
+                  backgroundColor: [ "#f14444","#34495e","#2ecc71"]
+              }]
+          },
+          options: {
+            rotation: 0.8,
+            animateScale: true
+          }
+      });
+    });
+  </script>
+</body>
+</html>

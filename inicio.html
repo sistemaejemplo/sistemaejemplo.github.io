@@ -1,0 +1,342 @@
+<!DOCTYPE html5>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>mpc</title>
+    <link rel="stylesheet" href="css/boostrap-dist.css"/>
+    <link rel="stylesheet" href="css/flexboxgrid-dist.css">
+    <link href="https://file.myfontastic.com/8ypDSzHSaeRKZx2Nz5ntJB/icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/jquery-confirm-dist.css">
+    <link rel="stylesheet" href="css/dataTables-bootstrap-dist.css">
+    <link rel="stylesheet" href="css/core-dist.css"/>
+    <style>
+    	.modulos {
+    		display: flex;
+    		justify-content: flex-end;
+    		flex-flow: row wrap;
+    	}
+    	.modulos a {
+    		border-top-left-radius: 4px;
+    		border-top-right-radius: 4px;
+    		align-items: center;
+    		margin: 10px;
+    		background: #16a085;
+    		color: #fff;
+    	}
+    	.modulos a:hover {
+    		box-shadow: -300px 0px teal inset;
+        transition: all .3s;
+        color: #fff;
+      }
+      .cantidad {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      .cantidad span {
+        width: 50%;
+        flex: auto;
+        display:block;
+        float: left;
+        text-align: center;
+        padding: 10px 20px;
+      }
+      .cantidad .panel-body {
+        padding: 0;
+      }
+      @media only screen and (min-width: 700px) {
+        .cantidad span {
+          width: auto;
+          text-align: left;
+        }
+      }
+      .ordenes td a {
+        display: flex;
+        line-height: 20px;
+        width: 100%;
+        color: #444;
+      }
+      .ordenes td:hover * {
+        color: teal;
+      }
+      .mpc-eye {
+        color: #444;
+      }
+      #mycanvas {
+        margin-bottom: 30px;
+      }
+    	</style>
+  </head>
+  <body>
+    <header>
+      <a href="#0" class="mover-aside mpc-menu"></a>
+      <div class="nav-derecha">
+        <a href="#0" class="mpc-mail"></a>
+        <a href="#0" class="mpc-bell"></a>
+        <div class="dropdown">
+          <a href="#0" data-toggle="dropdown">
+            <div class="usuario-icono">
+              <img src="img/usuarios/x80/10m.jpg" alt="">
+            </div>
+            <span>Camilo Bermudez</span>
+            <i class="mpc-down-mini"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="perfil.html"><i class="mpc-user"></i>Perfil</a></li>
+            <li><a href="#"><i class="mpc-question"></i>Ayuda</a></li>
+            <li><a href="index.html"><i class="mpc-power-off"></i>Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    
+    <aside>
+      <a href="inicio.html"><i class="mpc-home"></i>Inicio</a>
+      <a href="lista_vehiculos.html"><i class="mpc-book"></i>Vehículos</a>
+      <a href="#0"><i class="mpc-clipboard"></i>Ficha técnica</a>
+      <a href="lista_componentes.html"><i class="mpc-droplet"></i>Componentes</a>
+      <a href="lista_de_ordenes.html"><i class="mpc-list-alt"></i>Ordenes</a>
+      <a href="#0"><i class="mpc-chart-bar"></i>Estadisticas</a>
+      <a href="reportes.html"><i class="mpc-book-1"></i>Reportes</a>
+      <a href="lista_usuarios.html"><i class="mpc-users"></i>Usuarios</a>
+    </aside>
+
+    <main> 
+      <!-- Miga de pan -->
+      <div class="row sin-margen caja miga">
+        <div class="col-xs-12 col-sm-4">
+          <ol class="breadcrumb">
+            <li class="active"><i class="mpc-home"></i>Inicio</li>
+          </ol>
+        </div>
+        <div class="col-xs-12 col-sm-8 modulos">
+        	<a href="lista_usuarios.html" class="btn"><i class="mpc-car"></i>Vehículos</a>
+      		<a href="lista_de_ordenes.html" class="btn"><i class="mpc-list-alt"></i>Ordenes</a>
+      		<a href="reportes.html" class="btn"><i class="mpc-book-1"></i>Reportes</a>
+      		<a href="lista_usuarios.html" class="btn"><i class="mpc-user"></i>Usuarios</a>
+        </div>
+      </div>
+      <!-- Contenido -->
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+          <div class="panel panel-default cantidad">
+            <div class="panel-heading"><i class="mpc-home"></i>Sistema</div>
+            <div class="panel-body">
+              <span><i class="mpc-car"></i>Vehículos : 34</span>
+              <span><i class="mpc-tags"></i>Ordenes : 10</span>
+              <span><i class="mpc-wrench"></i>Mantenimientos : 45</span>
+              <span><i class="mpc-users"></i>Usuarios : 3</span>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading"><i class="mpc-clipboard"></i>Revisiones vs Mantenimientos</div>
+            <canvas id="revisonMantenimiento" width="100" height="25">
+          </div>  
+          <div class="panel panel-default table-responsive">
+            <div class="panel-heading"><i class="mpc-list-alt"></i>Ordenes en espera</div>
+            <table id="ordenes" class="table table-list">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Tipo</th>
+                  <th>Generada</th>
+                  <th>Estado</th>
+                  <th>Matricula</th>
+                  <th>Plazo</th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2</td>
+                  <td>Revisión</td>
+                  <td>01/06/2016</td>
+                  <td><p tittle="nombre" class="letra danger">Cancelada</p></td>
+                  <td>KHP-815</td>
+                  <td>05/06/2016</td>
+                  <td><a href="estado_orden_revision.html" class="mpc-eye" data-toggle="editar" data-placement="top" title="Detalle de órden"></a></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Mantenimiento</td>
+                  <td>01/06/2016</td>
+                  <td><p tittle="nombre" class="letra default">Finalizada</p></td>
+                  <td>KHP-815</td>
+                  <td>05/06/2016</td>
+                  <td><a href="estado_orden_revision.html" class="mpc-eye" data-toggle="editar" data-placement="top" title="Detalle de órden"></a></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Revisión</td>
+                  <td>01/06/2016</td>
+                  <td><p tittle="nombre" class=" letra pendiente">Pendiente</p></td>
+                  <td>KHP-815</td>
+                  <td>05/06/2016</td>
+                  <td><a href="estado_orden_revision.html" class="mpc-eye" data-toggle="editar" data-placement="top" title="Detalle de órden"></a></td>
+                </tr>
+                <tr>
+                <tr>
+                  <td>6</td>
+                  <td>Mantenimiento</td>
+                  <td>01/06/2016</td>
+                  <td><p tittle="nombre" class=" letra danger">Finalizada</p></td>
+                  <td>KHP-815</td>
+                  <td>05/06/2016</td>
+                  <td><a href="estado_orden_revision.html" class="mpc-eye" data-toggle="editar" data-placement="top" title="Detalle de órden"></a></td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Mantenimiento</td>
+                  <td>01/06/2016</td>
+                  <td><p tittle="nombre" class=" letra pendiente">Pendiente</p></td>
+                  <td>KHP-815</td>
+                  <td>05/06/2016</td>
+                  <td><a href="estado_orden_revision.html" class="mpc-eye" data-toggle="editar" data-placement="top" title="Detalle de órden"></a></td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Revisión</td>
+                  <td>01/06/2016</td>
+                  <td><p tittle="nombre" class=" letra pendiente">Pendiente</p></td>
+                  <td>KHP-815</td>
+                  <td>05/06/2016</td>
+                  <td><a href="estado_orden_revision.html" class="mpc-eye" data-toggle="editar" data-placement="top" title="Detalle de órden"></a></td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading"><i class="mpc-clipboard"></i>Órdenes</div>
+            <center><canvas id="mycanvas" width="256" height="256" style="max-width: 300px;"></center>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading"><i class="mpc-car"></i>Ordenes finalizadas</div>
+            <table class="table table-hover ordenes">
+                <thead>
+                  <tr>
+                    <th>Vehículo</th>
+                    <th>Plazo maximo</th>
+                  </tr>
+                </thead>
+                <tdody>
+                  <tr>
+                    <td><a href="#0"> VHA-122</a></td>
+                    <td><a href="#0">2016-09-06</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#0"> DQS-321</a></td>
+                    <td><a href="#0">2016-09-06</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#0"> RIB-915</a></td>
+                    <td><a href="#0">2016-09-06</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#0"> ASC-483</a></td>
+                    <td><a href="#0">2016-09-06</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#0"> CMN-313</a></td>
+                    <td><a href="#0">2016-09-06</a></td>
+                  </tr>
+                </tdody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- JavaScript -->
+
+    <script src="js/jquery-dist.js"></script>
+    <script src="js/boostrap-dist.js"></script>
+    <script src="js/jquery-confirm-dist.js"></script>
+    <script src="js/jquery-datatables-dist.js"></script>
+    <script src="js/dataTables-boostrap-dist.js"></script>
+    <script src="js/core-dist.js"></script>
+    <script src="js/chart-dist.js"></script>
+    <script type="text/javascript">
+      $('[data-toggle="editar"]').tooltip();
+      var colera = document.getElementById("mycanvas");
+      var mycanvas = new Chart(colera, {
+        type:'doughnut',
+        data: {
+          labels: [
+              "Activas",
+              "Pendientes",
+              "Finalizadas",
+              "Canceladas"
+          ],
+          animation:{
+            animateScale: true
+          },
+          datasets: [{
+              data: [70, 100,120, 30],
+              backgroundColor: [
+                "#2ecc71",
+                "#999999",
+                "#34495e",
+                "#f14444"
+              ],
+              hoverBackgroundColor: [
+                "#2ecc71",
+                "#999999",
+                "#34495e",
+                "#f75555"
+              ]
+            }]
+        }
+      });
+      var ctx = document.getElementById("revisonMantenimiento");
+      var revisonMantenimiento = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ["Mayo","Abril","Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre"],
+            datasets: [
+              {
+                label: "Revisiones",
+                fill: false,
+                lineTension: 0.1,
+                borderColor: "teal",
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "teal",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 4,
+                pointHoverRadius: 4,
+                backgroundColor: 'teal',
+                pointHoverBackgroundColor: "rgba(0,0,0,1)",
+                pointHoverBorderWidth: 1,
+                pointRadius: 1,
+                data: [2,3,6,6,4,7],
+              },
+              {
+                label: "Mantenimientos",
+                fill: false,
+                lineTension: 0,
+                borderColor: "#34495e", 
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "#34495e",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 4,
+                pointHoverRadius: 4,
+                backgroundColor: '#34495e',
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "#000",
+                pointHoverBorderWidth: 1,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: [14,6,5,4,2,2],
+                spanGaps: false,
+              }
+            ]
+          }
+      });
+    </script>
+  </body>
+</html>

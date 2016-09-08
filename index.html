@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>MPC</title>
+
+	<link rel="stylesheet" href="css/boostrap-dist.css">
+	<link rel="stylesheet" href="css/flexboxgrid-dist.css">
+	<link rel="stylesheet" href="css/formValidation-dist.css">
+	<link rel="stylesheet" href="css/index-dist.css">
+	<link rel="stylesheet" href="css/animate.css">
+	<link href="https://file.myfontastic.com/8ypDSzHSaeRKZx2Nz5ntJB/icons.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!-- Contenido en header -->
+
+	<header>
+		<nav>
+			<a data-toggle="modal" href='#modal_ingreso'>Inicia sesión</a>
+			<a href="" class="active">Nuestro equipo</a>
+		</nav>
+	</header>
+
+	<!--Modal login Mpc-->
+
+	<div class="modal fade" id="modal_ingreso" data-keyboard="false" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<legend>Ingresar</legend>
+
+					<form id="formulario_ingreso">
+
+						<div class="form-group">
+							<input type="text" class="form-control" id="" name="usuario" placeholder="Número de cédula *">
+						</div>
+
+						<div class="form-group">
+							<input type="text" class="form-control" id="" name="password" placeholder="Contraseña *">
+						</div>
+
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary" id="ingresa">Ingresra</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!--Fin de modal-->
+
+	<!-- Inicio de main-->
+
+	<section class="main">
+		<img src="img/logo.png" alt="">
+		<p>MPC le permite llevar una facil gestión de mantenimiento desde el diseño y planeación de las tareas de mantenimiento preventivas
+			y correctivas, hasta la generación de Órdenes de Servicio y el análisis detallado de costos utilizados</p>
+	</section>
+
+	<div class="down">
+		<a href="#" class="mpc-down" href="index.html?scrollTo=contenido"></a>
+	</div>
+
+	<div class="triangulo"></div>
+
+	<!-- Contenido-->
+	
+	<section class="contenido">
+
+		<div class="contenedor">
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 text-center">
+					<img src="img/inicio/inici-html.png" alt="" class="wow fadeInRight" data-wow-duration="2s">
+				</div>
+				<div class="col-xs-12 col-sm-6 text-left">
+					<ul class="wow fadeInLeft" data-wow-duration="2s">
+						<li data-aos="fade-left">
+							Evite pérdidas económicas por correctivos a causa de un preventivo mal realizado.</li>
+						<li data-aos="fade-right">
+							Análisis detallado de costos para poder tomar decisiones de respuesta.</li>
+						<li data-aos="fade-left">
+							Control y eficiencia de sus proveedores de componentes.</li>
+						<li data-aos="fade-right">
+							Control y eficiencia de su personal técnico mecánico.</li>
+						<li data-aos="fade-left">
+							Seguridad en la salida de sus viajes y evitar pérdidas por fallas en curso.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="row padding-bottom">
+				<div class="col-xs-12 col-sm-6 animated fadeInDown">
+					<p>MPC le permite tener una realidad clara con respecto al gasto de cada vehículo, graficándolo contra el valor de correcciones,
+						nos dará una idea muy clara de las desventajas al gastar demasiado en mantenimientos.</p>
+				</div>
+				<div class="col-xs-12 col-sm-6 animated fadeInUp">
+					<center>
+						<canvas id="myCharts" width="200" height="200" style="max-width: 280px;"></canvas>
+					</center>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<!-- Javascript-->
+
+	<script src="js/jquery-dist.js"></script>
+	<script src="js/boostrap-dist.js"></script>
+	<script src="js/formValidation-dist.js"></script>
+	<script src="js/framework/bootstrap-dist.js"></script>
+	<script src="js/jquery-mask.js"></script>
+	<script src="js/chart-dist.js"></script>
+	<script src="js/animaciones-dist.js"></script>
+
+	<script type="text/javascript">
+
+			// Validación formulario
+			$('[name="usuario"]').mask('0000000000000');
+
+			$('#ingresa').on('click',function(){
+				if ($('[name="usuario"]').val() == '987654321') {
+					alert('No! ingresa');
+					window.location = "http://www.stackoverflow.com";
+				}
+			})
+
+			$('#formulario_ingreso')
+				.formValidation({
+					framework: 'bootstrap',
+					fields: {
+						usuario:{
+							validators: {
+								notEmpty: {
+									message: 'Minimo 8 números, maximo 15.'
+								},
+								stringLength: {
+									min:8,
+									max:15,
+									message: 'Minimo 8 números, maximo 15.'
+								}
+							}
+						},
+						password: {
+							validators: {
+								notEmpty: {
+									message: 'Contraseña requerida.'
+								}
+							}
+						}
+					},
+					
+				});
+
+				// Reseteo modal
+				$('#modal_ingreso').on('hidden.bs.modal', function() {
+					$('#formulario_ingreso').formValidation('resetForm', true);
+				});
+
+			// Scroll autotop
+
+			$('.mpc-down').click(function(){
+				$('html, body').animate({
+					scrollTop: $(".contenedor").offset().top
+				}, 1000);
+			});
+
+			// Animaciones
+
+			wow = new WOW(
+				{
+					boxClass:     'wow',      // default
+					animateClass: 'animated', // default
+					offset:       0,          // default
+					mobile:       true,       // default
+					live:         true        // default
+				}
+			)
+			wow.init();
+
+			//canvas
+
+			var colera = document.getElementById("myCharts");
+			var myCharts = new Chart(colera, {
+				type: 'pie',
+				data: {
+				labels: ["Pérdidas","Correcciones","Preventivos"],
+				datasets: [
+					{
+						data: [30, 40, 160],
+						backgroundColor: [ "#f14444","#34495e","#2ecc71"]
+					}]
+				},
+				options: {
+					rotation: 0.4,
+					animateScale: true
+				}
+			});
+			
+		</script>
+</body>
+
+</html>

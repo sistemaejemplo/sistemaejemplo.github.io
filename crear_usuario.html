@@ -1,0 +1,288 @@
+<!DOCTYPE html5>
+<html lang="es">
+  <head>
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+
+    <title>mpc</title>
+
+    <link rel="stylesheet" href="css/boostrap-dist.css"/>
+    <link rel="stylesheet" href="css/jquery-confirm-dist.css">
+    <link rel="stylesheet" href="css/flexboxgrid-dist.css">
+    <link rel="stylesheet" href="css/formValidation-dist.css">
+    <link rel="stylesheet" href="css/core-dist.css"/>
+    <link rel="stylesheet" href="css/usuarios-dist.css">
+    <link href="https://file.myfontastic.com/8ypDSzHSaeRKZx2Nz5ntJB/icons.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <header>
+      <a href="#0" class="mover-aside mpc-menu"></a>
+      <div class="nav-derecha">
+        <a href="#0" class="mpc-mail"></a>
+        <a href="#0" class="mpc-bell"></a>
+        <div class="dropdown">
+          <a href="#0" data-toggle="dropdown">
+            <div class="usuario-icono">
+              <img src="img/usuarios/x80/10m.jpg" alt="">
+            </div>
+            <span>Camilo Bermudez</span>
+            <i class="mpc-down-mini"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="perfil.html"><i class="mpc-user"></i>Perfil</a></li>
+            <li><a href="#"><i class="mpc-question"></i>Ayuda</a></li>
+            <li><a href="index.html"><i class="mpc-power-off"></i>Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    
+    <aside>
+      <a href="inicio.html"><i class="mpc-home"></i>Inicio</a>
+      <a href="lista_vehiculos.html"><i class="mpc-book"></i>Vehículos</a>
+      <a href="#0"><i class="mpc-clipboard"></i>Ficha técnica</a>
+      <a href="lista_componentes.html"><i class="mpc-droplet"></i>Componentes</a>
+      <a href="lista_de_ordenes.html"><i class="mpc-list-alt"></i>Ordenes</a>
+      <a href="#0"><i class="mpc-chart-bar"></i>Estadisticas</a>
+      <a href="reportes.html"><i class="mpc-book-1"></i>Reportes</a>
+      <a href="lista_usuarios.html"><i class="mpc-users"></i>Usuarios</a>
+    </aside>
+
+    <main> 
+      <!-- Miga de pan -->
+      <div class="row sin-margen caja miga">
+        <div class="col-xs-12 col-sm-6">
+          <ol class="breadcrumb">
+            <li><a href="inicio.html"><i class="mpc-home"></i>Inicio</a></li>
+            <li><a href="lista_usuarios.html"><i class="mpc-user"></i>Usuarios</a></li>
+            <li class="active"><i class="mpc-plus"></i>Nuevo usuario</li>
+          </ol>
+        </div>
+        <div class="col-xs-12 col-sm-6 start-xs end-sm">
+        </div>
+      </div>
+      <!-- Contenido -->
+      <div class="row">
+        <div class="col-xs-12 col-md-6 caja blanca">
+          <form id="formularioRegistroUsuario">
+            <h2>
+              Registro de usuario 
+            </h2>
+            <hr>
+            <div class="row">
+              <div class="form-group col-xs-12 col-md-6">
+                  <label class="control-label">Nombres *</label>
+                  <input type="text" class="form-control" name="nombres" placeholder="Jose Miguel" />
+              </div>
+              <div class="form-group col-xs-12 col-md-6">
+                  <label class="control-label">Apellidos *</label>
+                  <input type="text" class="form-control" name="apellidos" placeholder="Ramiréz Léon" />
+              </div>
+            </div>
+
+           <div class="row">
+              <div class="form-group col-xs-12 col-sm-6">
+                <label class="control-label">Fecha nacimento *</label>
+                <input type="date" class="form-control" id="fechaNacimiento" name="nfechaNacimiento" placeholder="__/__/____">
+              </div>
+              <div class="form-group col-xs-12 col-sm-6 ">
+                <label class="control-label">Genero</label>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="genero" value="male" /> Hombre
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="genero" value="female" /> Mujer
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="genero" value="other" /> Otro
+                    </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                  <label class="control-label">Numero Teléfono</label>
+                  <input type="text" class="form-control" id="telefono" placeholder="777-0836" />
+              </div>
+              <div class="form-group col-xs-12 col-md-6">
+                    <label class="control-label">Numero Celular *</label>
+                    <input type="text" class="form-control" id="celular" name="nCelular" placeholder="312-356-23-12" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-12">
+                    <label class=" control-label">Correo electrónico *</label>
+                    <input type="text" class="form-control" name="email" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-xs-12">
+                <label class="control-label">Número de identidicación *</label>
+                <input type="text" class="form-control" id="cedula" name="ncedula" placeholder="567453612" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-xs-12 flexible between-xs middle-xs">
+                <label >Generar Contraseña</label>
+                <div class="flexible">
+                  <input id="password" type="text" class="form-control" name="npassword" value="" placeholder="------" readonly/>
+                  <a class="btn btn-mpc" id="generar-password"><i class="mpc-refresh"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12">
+                  <button type="submit" id="enviar" class="btn btn-primary btn-block" name="signup" value="Sign up">Registrar nuevo usuario</button>
+                </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-xs-12 col-md-6 caja">
+          <div class="page-header">
+            <h2>
+              Tenga en cuenta que... 
+            </h2>
+            <hr>
+            <ul style="margin-left: 20px;">
+              <li>
+                <strong>Acceso</strong> <br><br>
+                <ol>
+                  <li>
+                  Para acceder a la aplicación es necesario contar con <b>Número de identificación (Número de cédula)</b> ya que este sera su usuario.                
+                  </li>
+                  <br><br>
+                  <li>
+                  La contraseña <b>se genera automaticamente recuerde anotarla</b> y posteriormente actualizarla desde el perfil.                
+                  </li>
+                </ol>
+                <br><br>
+
+              </li>
+              <li>
+                <strong>Registro</strong> <br><br>
+                Al registrarse, el usuario va a disponer de un usuario y una contraseña que van a hacer posible que, en el caso de tener problemas con la aplicación, nuestro administrador pueda hacer un seguimiento para solucionarlos.
+                <br><br>
+              </li>
+              <li>
+                <strong>Tareas realizadas</strong> <br><br>
+                Por otra parte, el usuario podrá cerrar la sesión e iniciarla de nuevo en el punto en el que se hubiera quedado, ya que el sistema guarda el trabajo realizado.
+                <br><br>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- JavaScript -->
+
+    <script src="js/jquery-dist.js"></script>
+    <script src="js/boostrap-dist.js"></script>
+    <script src="js/jquery-confirm-dist.js"></script>
+    <script src="js/formValidation-dist.js"></script>
+    <script src="js/framework/bootstrap-dist.js"></script>
+    <script src="js/jquery-mask.js"></script>
+    <script src="js/core-dist.js"></script>
+
+    <!-- JavaSript personalizado -->
+    <script>
+      $(document).ready(function() {
+        $('#password').val($.passGen());
+        $('#generar-password').on('click',function(){
+          $('#password').val($.passGen());
+        });
+        $('#telefono').mask('0000000');
+        $('#celular').mask('0000000000');
+        $('#cedula').mask('0#');
+        $('#formularioRegistroUsuario')
+          .formValidation({
+            framework: 'bootstrap',
+            fields: {
+              nombres: {
+                  validators: {
+                      notEmpty: {
+                          message: 'Los nombres son requeridos.'
+                      }
+                  }
+              },
+              apellidos: {
+                  validators: {
+                      notEmpty: {
+                          message: 'Los apellidos son requeridos.'
+                      }
+                  }
+              },
+              nfechaNacimiento: {
+                  validators: {
+                      notEmpty: {
+                          message: 'Se requiere de la fecha.'
+                      },
+                      date: {
+                          format: 'DD/MM/YYYY',
+                          message: 'La fecha no tiene un formato valido.'
+                      }
+                  }
+              },
+              genero: {
+                validators: {
+                  notEmpty: {
+                    message: 'Se necesita de un genero.'
+                  }
+                }
+              },
+              nCelular: {
+                validators: {
+                  notEmpty: {
+                    message: 'Se requiere de un número celular'
+                  },
+                  stringLength: {
+                    min: 9,
+                    max: 13,
+                    message: 'Minimo 7 números.'
+                  }
+                }
+              },
+              email: {
+                validators: {
+                  notEmpty: {
+                    message: 'Se require de un email.'
+                  },
+                  emailAddress: {
+                    message: 'Email invalido.'
+                  }
+                }
+              },
+              ncedula: {
+                validators: {
+                  notEmpty: {
+                    message: 'Se requiere de un número de identificación.'
+                  },
+                  stringLength: {
+                    min: 7,
+                    max: 11,
+                    message: 'Minimo 7 números, Máximo 11.'
+                  }
+                }
+              }
+            }
+          });
+      });
+    </script>
+  </body>
+</html>

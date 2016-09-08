@@ -1,0 +1,114 @@
+<!DOCTYPE html5>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>mpc</title>
+    <link rel="stylesheet" href="css/boostrap-dist.css"/>
+    <link rel="stylesheet" href="css/flexboxgrid-dist.css">
+    <link href="https://file.myfontastic.com/8ypDSzHSaeRKZx2Nz5ntJB/icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/jquery-confirm-dist.css">
+    <link rel="stylesheet" href="css/dataTables-bootstrap-dist.css">
+    <link rel="stylesheet" href="css/core-dist.css"/>
+    <link rel="stylesheet" href="css/usuarios-dist.css">
+  </head>
+  <body>
+    <header>
+      <a href="#0" class="mover-aside mpc-menu"></a>
+      <div class="nav-derecha">
+        <a href="#0" class="mpc-mail"></a>
+        <a href="#0" class="mpc-bell"></a>
+        <div class="dropdown">
+          <a href="#0" data-toggle="dropdown">
+            <div class="usuario-icono">
+              <img src="img/usuarios/x80/10m.jpg" alt="">
+            </div>
+            <span>Camilo Bermudez</span>
+            <i class="mpc-down-mini"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="perfil.html"><i class="mpc-user"></i>Perfil</a></li>
+            <li><a href="#"><i class="mpc-question"></i>Ayuda</a></li>
+            <li><a href="index.html"><i class="mpc-power-off"></i>Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    
+    <aside>
+      <a href="inicio.html"><i class="mpc-home"></i>Inicio</a>
+      <a href="vehiculos.html"><i class="mpc-book"></i>Vehículos</a>
+      <a href="#"><i class="mpc-clipboard"></i>Ficha técnica</a>
+      <a href="componentes.html"><i class="mpc-droplet"></i>Componentes</a>
+      <a href="lista_de_ordenes.html"><i class="mpc-list-alt"></i>Ordenes</a>
+      <a href="#0"><i class="mpc-chart-bar"></i>Estadisticas</a>
+      <a href="reportes.html"><i class="mpc-book-1"></i>Reportes</a>
+      <a href="lista_usuarios.html"><i class="mpc-users"></i>Usuarios</a>
+    </aside>
+
+    <main> 
+      <!-- Miga de pan -->
+      <div class="row sin-margen caja miga">
+        <div class="col-xs-12 col-sm-6">
+          <ol class="breadcrumb">
+            <li><a href="inicio.html"><i class="mpc-home"></i>Inicio</a></li>
+            <li><a href="lista_de_ordenes.html"><i class="mpc-list-alt"></i>Lista de ordenes</a></li>
+            <li class="active"><i class="mpc-eye"></i>Estado orden</li>
+          </ol>
+        </div>
+      </div>
+      <!--contenido-->
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-6">
+                <label class="control-label " for="codigo-orden">
+                 Codigo orden
+                </label>
+                <label class="form-control" id="codigo-orden" name="codigo-orden" type="text" disabled/> 0001</label>
+              </div>
+              <div class="form-group col-xs-12 col-sm-6">
+                <label class="control-label " for="codigo-orden">
+                 Tipo orden
+                </label>
+                <label class="form-control" id="codigo-orden" name="codigo-orden" type="text" disabled/> Preventiva</label>
+              </div>
+              <div class="form-group col-xs-12 col-sm-6">
+                <label for="sel1">Estado</label>
+                <select class="form-control" id="sel1" disabled>
+                  <option>Activo</option>
+                  <option>Pendiente</option>
+                  <option>Cancelada</option>
+                  <option>Finalizada</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-12 col-sm-6">
+                <label class="control-label " for="matricula">
+                 Matricula
+                </label>
+                <label class="form-control" id="matricula" name="matricula" type="text" disabled/> STN231</label>
+              </div>
+              <div class="form-group col-xs-12 col-sm-6">
+                <label class="control-label " for="plazo-maximo">
+                 Plazo maximo
+                </label>  
+                <input class="form-control" id="plazo-maximo" name="plazo-maximo" type="date" value="2016-08-03" disabled/>
+              </div>
+              <div class="form-group col-xs-12 col-sm-6">
+                <label class="control-label " for="plazo-maximo">
+                 Fecha registro
+                </label>
+                <input class="form-control" id="plazo-maximo" name="plazo-maximo" type="date" value="2016-07-01" disabled/>
+              </div>
+            </div>
+              <div class="form-group col-xs-12 col-sm-10">
+                <label for="comment">Anomalia</label>
+                <textarea class="form-control" rows="5" id="comment" disabled>Falla en el sistema de ABS. </textarea>
+              </div>
+            <div class="col-xs-12 col-sm-1 start-xs end-sm" id="boton">
+              <a href="lista_de_ordenes.html" button class="btn btn-danger"><i class="mpc-atras"></i>Volver</a></button>
+            </div>
+    </main>
+    <script src="js/jquery-dist.js"></script>
+    <script src="js/boostrap-dist.js"></script>
+    <script src="js/core-dist.js"></script>
+  </body>
+</html>
